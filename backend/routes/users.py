@@ -45,6 +45,7 @@ def create_user():
         user_data = {}
         if request.data:
             user_data = dict(loads(request.data))
+        user_data['points'] = 0
         users_collection.insert_one(user_data)
     except Exception as e:
         return "An error has occurred: {}".format(str(e)), 400
@@ -110,4 +111,3 @@ def get_user(user_id):
         return "An error has occurred {}".format(str(e)), 400
 
     return jsonify(user)
-
