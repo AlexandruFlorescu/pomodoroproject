@@ -31,6 +31,8 @@ services:
     - mongo_data:/data/db
     ports:
     - 27017:27017
+    networks:
+      - app-tier
     restart: unless-stopped
 
 
@@ -42,6 +44,7 @@ services:
       - "5000:5000"
     depends_on:
       - redis
+      - mongodb
     networks:
       - app-tier
 

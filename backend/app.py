@@ -5,6 +5,7 @@ from flask_bootstrap import Bootstrap
 from flask_fontawesome import FontAwesome
 
 from routes.users import users_endpoint
+from routes.centers import centers_endpoint
 
 DEBUG_MODE = True
 app = Flask(__name__, static_url_path="/static")
@@ -14,7 +15,8 @@ app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024  # 20 Mb
 FontAwesome(app)
 cors = CORS(app, resources={r"*": {"origins": "*"}})
 
-app.register_blueprint(file_analyzer_endpoint)
+app.register_blueprint(users_endpoint)
+app.register_blueprint(centers_endpoint)
 
 app.config['SWAGGER'] = {
     'favicon': '/static/favicon.ico',
