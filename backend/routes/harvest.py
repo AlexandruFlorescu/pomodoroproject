@@ -63,11 +63,8 @@ def create_harvest():
             error_message = "Center with id {} not found".format(harvest_data['center_id'])
             return error_message, 404
 
+        harvest_data['center_approved'] = False
         harvests_collection.insert_one(harvest_data)
-        to_set = {
-            'points': user.get('points',0) + harvest_data.get('quantity', 0)
-        }
-        users_collection.update_one({"_id": user["_id"]}, {"$set": to_set})
 
     except Exception as e:
         return "An error has occurred: {}".format(str(e)), 400
@@ -86,7 +83,7 @@ def get_all():
     responses:
       200:
         description: "Successful operation"
-      400:
+      500:
         description: "generic error"
     """
     try:
@@ -118,15 +115,17 @@ def get_harvest(harvest_id):
     responses:
       200:
         description: "Successful operation"
-      400:
-        description: "generic error"
+    
       404:
         description: "harvest not found in database"
+
+      500:
+        description: "generic error"
     """
     try:
         harvest = harvests_collection.find_one({"_id": ObjectId(harvest_id)})
         if not harvest:
-            error_message = "harvest with id {} not found".format(harvest_id)
+            error_message = "User with id {} not found".format(harvest_id)
             return error_message, 404
         harvest['_id'] = str(harvest['_id'])
     except Exception as e:
@@ -134,3 +133,78 @@ def get_harvest(harvest_id):
 
     return jsonify(harvest)
 
+@harvests_endpoint.route("/pending/<center_id>", methods=["GET"])
+def get_pending(center_id):
+    """harvests endpoint
+    return all pending harvests for a center ID
+    ---
+    tags:
+    - harvests
+    summary: "Return all harvests for a center ID"
+    description: "return all harvests for a center ID"
+    parameters:
+    - name: "center_id"
+      in: "path"
+      description: "ID of individual center to return"
+      required: true
+      type: "string"
+    responses:
+      200:
+        description: "Successful operation"
+      500:
+        description: "generic error"
+    """
+    try:
+        harvests = harvests_collection.find({"center_id": center_id, "center_approved": False})
+        result = [harvest for harvest in harvests]
+        for harvest in result:
+            harvest['_id'] = str(harvest['_id'])
+
+    except Exception as e:
+        return "An error has occurred {}".format(str(e)), 400
+
+    return jsonify(result)
+
+
+@harvests_endpoint.route("/<harvest_id>/approve", methods=["PUT"])
+def approve_harvest(harvest_id):
+    """harvests endpoint
+    Approve a harvest by ID 
+    ---
+    tags:
+    - harvests
+    summary: "Return harvest by id"
+    description: "return harvest by id"
+    parameters:
+    - name: "harvest_id"
+      in: "path"
+      description: "ID of individual harvest to return"
+      required: true
+      type: "string"
+    responses:
+      200:
+        description: "Successful operation"
+    
+      404:
+        description: "harvest not found in database"
+
+      500:
+        description: "generic error"
+    """
+    try:
+        updateResult = harvests_collection.update_one({"_id": ObjectId(harvest_id)}, {"$set": {'center_approved': True}})
+        if updateResult.modified_count == 0:
+            error_message = "unapproved harvest with id {} not found".format(harvest_id)
+            return error_message, 404
+        
+        harvest= harvests_collection.find_one({"_id": ObjectId(harvest_id)})
+        user = users_collection.find_one({"_id": ObjectId(harvest['user_id'])})
+        to_set = {
+            'points': user.get('points',0) + harvest.get('quantity', 0)
+        }
+        users_collection.update_one({"_id": user["_id"]}, {"$set": to_set})
+
+    except Exception as e:
+        return "An error has occurred {}".format(str(e)), 400
+
+    return jsonify({"success": True})
