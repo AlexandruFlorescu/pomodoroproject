@@ -9,7 +9,7 @@ harvests_collection = pomodoro_db['harvests']
 users_collection = pomodoro_db['users']
 centers_collection = pomodoro_db['centers']
 
-@harvests_endpoint.route("/harvest", methods=["POST"])
+@harvests_endpoint.route("/", methods=["POST"])
 def create_harvest():
     """
     Endpoint used to create a new harvest
