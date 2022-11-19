@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'savingclimate';
+  lat = 51.678418;
+  lng = 7.809007;
 }

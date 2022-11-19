@@ -1,0 +1,33 @@
+<mat-accordion (opened)="true">
+    <mat-expansion-panel [formGroup]="centerForm">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Add center
+        </mat-panel-title>
+        <mat-panel-description>
+          Insert the data you want our users to find about your recycle center location
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field style="width: 100%; ">
+        <input matInput  formControlName="name" placeholder="Name">
+      </mat-form-field>
+      <br/>
+  
+      <mat-form-field style="width: 100%; ">
+        <input matInput formControlName="address" placeholder="Address">
+      </mat-form-field>
+      <br/>
+
+      <mat-form-field style="width: 100%; ">
+        <input matInput formControlName="phoneNumber" placeholder="Phone number">
+      </mat-form-field>
+      <br/>
+
+      <mat-form-field style="width: 100%; ">
+        <input matInput formControlName="email" placeholder="Email address">
+      </mat-form-field>
+      <br/>
+
+    </mat-expansion-panel>
+    
+  </mat-accordion>
