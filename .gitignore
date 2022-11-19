@@ -11,6 +11,10 @@
 npm-debug.log
 yarn-error.log
 
+# frontend 
+frontend/.angular
+frontend/node_modules
+
 # IDEs and editors
 .idea/
 .project
