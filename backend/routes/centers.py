@@ -25,7 +25,7 @@ def create_center():
     responses:
       200:
         description: "A new center was created was created"
-      400:
+      500:
         description: "generic error"
     definitions:
       Center:
@@ -68,7 +68,7 @@ def get_all():
     responses:
       200:
         description: "Successful operation"
-      400:
+      500:
         description: "generic error"
     """
     try:
@@ -100,10 +100,10 @@ def get_center(center_id):
     responses:
       200:
         description: "Successful operation"
-      400:
-        description: "generic error"
       404:
         description: "center not found in database"
+      500:
+        description: "generic error"
     """
     try:
         center = centers_collection.find_one({"_id": ObjectId(center_id)})

@@ -23,10 +23,10 @@ def create_activity():
         required: true
         schema:
           $ref: "#/definitions/Activity"
-      - in: formData
-        name: photo
-        type: file
-        description: The zip to upload.
+    #   - in: formData
+    #     name: photo
+    #     type: file
+    #     description: The photo to upload.
     responses:
       200:
         description: "A new activity was created was created"
@@ -49,19 +49,19 @@ def create_activity():
     """
     try:
         activity_data = {}
+
         if request.data:
-            activity_data = dict(loads(request.data))
+            activity_data = loads(request.data)
         
         # if "photo" in request.files:
-        #     a = request.files["photo"].read()
-
-        #     activity_data["photo"] = a
+        #     activity_data['photo'] = request.files["photo"].read()
             
         activities_collection.insert_one(activity_data)
     except Exception as e:
         return "An error has occurred: {}".format(str(e)), 400
+
     activity_data['_id'] = str(activity_data['_id'])
-    return jsonify(activity_data)
+    return jsonify(dumps(activity_data))
 
 @activities_endpoint.route("/", methods=["GET"])
 def get_all():
@@ -107,10 +107,10 @@ def get_activity(activity_id):
     responses:
       200:
         description: "Successful operation"
-      400:
-        description: "generic error"
       404:
         description: "activity not found in database"
+      500:
+        description: "generic error"
     """
     try:
         activity = activities_collection.find_one({"_id": ObjectId(activity_id)})

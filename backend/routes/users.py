@@ -25,7 +25,7 @@ def create_user():
     responses:
       200:
         description: "A new user was created was created"
-      400:
+      500:
         description: "generic error"
     definitions:
       User:
@@ -64,7 +64,7 @@ def get_all():
     responses:
       200:
         description: "Successful operation"
-      400:
+      500:
         description: "generic error"
     """
     try:
@@ -96,10 +96,10 @@ def get_user(user_id):
     responses:
       200:
         description: "Successful operation"
-      400:
-        description: "generic error"
       404:
         description: "user not found in database"
+      500:
+        description: "generic error"
     """
     try:
         user = users_collection.find_one({"_id": ObjectId(user_id)})
