@@ -7,7 +7,7 @@ ADD static /opt/static
 ADD static /opt/flasgger_static
 ADD routes /opt/routes
 ADD lib /opt/lib
-ADD interfaces /opt/interfaces
+# ADD interfaces /opt/interfaces
 COPY init.sh /opt
 
 WORKDIR /opt
