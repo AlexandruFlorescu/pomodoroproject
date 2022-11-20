@@ -25,7 +25,7 @@ def create_user():
     responses:
       200:
         description: "A new user was created was created"
-      400:
+      500:
         description: "generic error"
     definitions:
       User:
@@ -64,7 +64,7 @@ def get_all():
     responses:
       200:
         description: "Successful operation"
-      400:
+      500:
         description: "generic error"
     """
     try:
@@ -96,10 +96,10 @@ def get_user(user_id):
     responses:
       200:
         description: "Successful operation"
-      400:
-        description: "generic error"
       404:
         description: "user not found in database"
+      500:
+        description: "generic error"
     """
     try:
         user = users_collection.find_one({"_id": ObjectId(user_id)})
@@ -111,3 +111,29 @@ def get_user(user_id):
         return "An error has occurred {}".format(str(e)), 400
 
     return jsonify(user)
+
+@users_endpoint.route("/leaderboard", methods=["GET"])
+def get_top_10_users():
+    """users endpoint
+    Return top 10 users by points
+    ---
+    tags:
+    - users
+    summary: "Return top 10 users by points"
+    description: "Return top 10 users by points"
+    responses:
+      200:
+        description: "Successful operation"
+      500:
+        description: "generic error"
+    """
+    try:
+        users = users_collection.find().sort("points", -1).limit(10)
+        result = [user for user in users]
+        for user in result:
+            user['_id'] = str(user['_id'])
+
+    except Exception as e:
+        return "An error has occurred {}".format(str(e)), 400
+
+    return jsonify(result)

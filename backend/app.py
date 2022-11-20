@@ -6,6 +6,8 @@ from flask_fontawesome import FontAwesome
 
 from routes.users import users_endpoint
 from routes.centers import centers_endpoint
+from routes.activities import activities_endpoint
+from routes.harvest import harvests_endpoint
 
 DEBUG_MODE = True
 app = Flask(__name__, static_url_path="/static")
@@ -17,6 +19,8 @@ cors = CORS(app, resources={r"*": {"origins": "*"}})
 
 app.register_blueprint(users_endpoint)
 app.register_blueprint(centers_endpoint)
+app.register_blueprint(activities_endpoint)
+app.register_blueprint(harvests_endpoint)
 
 app.config['SWAGGER'] = {
     'favicon': '/static/favicon.ico',
@@ -25,8 +29,8 @@ app.config['SWAGGER'] = {
 
 template = {
     "info": {
-        "title": "Python API using Redis",
-        "description": "REST API for interacting with a Redis database",
+        "title": "Reciclopedia Official REST API",
+        "description": "U CAN MAKE THE WORLD BETTER STARTING NOW",
     }
 }
 
