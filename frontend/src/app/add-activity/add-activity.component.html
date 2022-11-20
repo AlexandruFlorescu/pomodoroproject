@@ -2,10 +2,10 @@
     <mat-expansion-panel [formGroup]="centerForm">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Add center
+          Add activity
         </mat-panel-title>
         <mat-panel-description>
-          Insert the data you want our users to find about your recycle center location
+          Insert the data you want our users to find about your activity
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field style="width: 100%; ">
@@ -19,16 +19,15 @@
       <br/>
 
       <mat-form-field style="width: 100%; ">
-        <input matInput formControlName="phone_number" placeholder="Phone number">
+        <input matInput formControlName="description" placeholder="Description">
       </mat-form-field>
       <br/>
 
       <mat-form-field style="width: 100%; ">
-        <input matInput formControlName="email" placeholder="Email address">
+        <input matInput formControlName="date" placeholder="Date">
       </mat-form-field>
       <br/>
 
-      <button mat-button type="submit" (click)="submitForm()"> Submit </button>
     </mat-expansion-panel>
     
   </mat-accordion>

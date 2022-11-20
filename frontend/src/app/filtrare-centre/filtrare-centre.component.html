@@ -94,6 +94,21 @@
 
       </mat-form-field>
       <br/> 
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [formGroup]="profileForm">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          3. Check your surroundings
+        </mat-panel-title>
+        <mat-panel-description>
+          Look for centers around you
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <!-- Use custom zoom buttons -->
+      <button mat-button (click)="zoomIn()">Zoom in</button>
+      <button mat-button (click)="zoomOut()">Zoom out</button>
 
       <google-map
         height="500px"
@@ -101,12 +116,19 @@
         [zoom]="zoom"
         [center]="center"
         [options]="options"
-        ></google-map>
-        
-        <!-- Use custom zoom buttons -->
-      <button (click)="zoomIn()">Zoom in</button>
-      <button (click)="zoomOut()">Zoom out</button>
+      >
+        <map-marker
+          *ngFor="let marker of markers"
+          [position]="marker.position"
+          [label]="marker.label"
+          [title]="marker.name"
+          [options]="marker.options"
+        >
+        </map-marker>
 
+      </google-map>
+      
 
     </mat-expansion-panel>
+
   </mat-accordion>

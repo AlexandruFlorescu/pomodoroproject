@@ -7,22 +7,17 @@
     
     <span class="menu-spacer" style="width:50%"></span>
     <div style="float:right">
-      <!-- <a mat-button [routerLink]="'/accounts'"> Accounts </a> -->
       <a color="secondary" mat-button [routerLink]="'/centers'"> All centers </a>
       <a color="secondary" mat-button [routerLink]="'/add-center'"> Add Recicle center </a>
-      <a color="secondary" mat-button [routerLink]="'/accordion'"> Find my recicling center </a>
+      <a color="secondary" mat-button [routerLink]="'/filters'"> Find my recicling center </a>
       <a color="secondary" mat-button [routerLink]="'/activities'"> Activities </a>
       <a color="secondary" mat-button [routerLink]="'/create-activity'"> Create Activity </a>
     </div>
   </mat-toolbar-row>
 
-  <!-- <mat-toolbar-row>
-      <span style="font-size: 12px;">SimpleCRM helps you easily manage your contacts</span>
-    </mat-toolbar-row> -->
   </mat-toolbar>
-<body>
-  <div style="width: 80%; height: 80%;  position: relative;
-  left: 10%; top: 5%">
+  <body style="background-image:'url(./assets/background.jpg)'; background-repeat: repeat-y; height:auto; min-height: 1000px;  ">
+    <div style="width: 80%; height: 80%; position: relative; left: 10%; top: 5%">
     <router-outlet></router-outlet>
 
   </div>

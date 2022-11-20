@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CentreService } from '../centre.service';
 
 @Component({
   selector: 'app-filtrare-centre',
@@ -47,7 +48,19 @@ export class FiltrareCentreComponent {
 
   }
 
+  constructor(private centers: CentreService) {
+
+  }
+
+  markers:any;
+
   ngOnInit() {
+    this.centers.getAllCenters().subscribe(resp => {
+      console.log(resp);
+      this.markers = resp;
+      
+    }
+    )
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
         lat: position.coords.latitude,

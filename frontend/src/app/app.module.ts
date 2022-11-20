@@ -1,5 +1,5 @@
 import { Injectable, NgModule } from '@angular/core';
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserModule} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,10 @@ import { CentersComponent } from './centers/centers.component';
 import { AddRecycleCenterComponent } from './add-recycle-center/add-recycle-center.component';
 // import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { CentreService } from './centre.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ActivitiesComponent } from './activities/activities.component';
+import { AddActivityComponent } from './add-activity/add-activity.component';
   
 @NgModule({
   declarations: [
@@ -18,6 +22,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     FiltrareCentreComponent,
     CentersComponent,
     AddRecycleCenterComponent,
+    ActivitiesComponent,
+    AddActivityComponent,
     // TestComponent
   ],
   imports: [
@@ -27,10 +33,10 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MaterialModule,
     ReactiveFormsModule,
     GoogleMapsModule,
-
+    HttpClientModule,
     
   ],
-  providers: [],
+  providers: [CentreService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
