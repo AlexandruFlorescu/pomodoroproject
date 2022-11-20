@@ -20,7 +20,7 @@ pomodoro_db = mongo_client['pomodoro']
 centers_collection = pomodoro_db['centers']
 
 for center in data:
-    center['coordinates'] = {"lat": center['coordinates'][0], "lng": center['coordinates'][1]}
+    center['coordinates'] = {"lat": format(center['coordinates'][0], '.3f'), "lng": format(center['coordinates'][1], '.3f')}
     print(center)
     centers_collection.insert_one(center)
 
