@@ -8,13 +8,9 @@
           Insert the data you want our users to find about your activity
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <mat-form-field style="width: 100%; ">
-        <input matInput  formControlName="name" placeholder="Name">
-      </mat-form-field>
-      <br/>
   
       <mat-form-field style="width: 100%; ">
-        <input matInput formControlName="address" placeholder="Address">
+        <input matInput formControlName="location" placeholder="Address">
       </mat-form-field>
       <br/>
 
@@ -27,6 +23,8 @@
         <input matInput formControlName="date" placeholder="Date">
       </mat-form-field>
       <br/>
+
+      <button mat-button type="submit" (click)="submitForm()"> Submit </button>
 
     </mat-expansion-panel>
     

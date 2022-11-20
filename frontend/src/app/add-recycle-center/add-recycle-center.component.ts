@@ -9,10 +9,9 @@ import { CentreService } from '../centre.service';
 })
 export class AddRecycleCenterComponent {
   centerForm = new FormGroup({
-    name: new FormControl(''),
-    address: new FormControl(''),
-    phone_number: new FormControl(''),
-    email: new FormControl(''),
+    Name: new FormControl(''),
+    Adresa: new FormControl(''),
+    Email: new FormControl(''),
     materials: new FormControl('')
   });
 

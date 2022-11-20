@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CentreService } from '../centre.service';
 
 @Component({
   selector: 'app-add-activity',
@@ -8,10 +9,16 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AddActivityComponent {
   centerForm = new FormGroup({
-    name: new FormControl(''),
-    address: new FormControl(''),
+    date: new FormControl(''),
     description: new FormControl(''),
     location: new FormControl(''),
-    materials: new FormControl('')
   });
+
+  
+  constructor(private centreService: CentreService) {
+  }
+
+  submitForm(){
+    return this.centreService.postNewActivity(this.centerForm.value).subscribe()
+  }
 }
