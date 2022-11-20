@@ -119,11 +119,8 @@
       >
         <map-marker
           *ngFor="let marker of markers"
-          [position]="marker.position"
-          [label]="marker.label"
-          [title]="marker.name"
-          [options]="marker.options"
-        >
+          [position]="{lat: conv(marker.coordinates['lat']), lng: conv(marker.coordinates['lng'])}"
+         >
         </map-marker>
 
       </google-map>

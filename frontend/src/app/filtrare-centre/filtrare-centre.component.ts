@@ -69,6 +69,9 @@ export class FiltrareCentreComponent {
     });
   }
 
+  conv(strrr: string) {
+    return Number(strrr)
+  }
 
   zoomIn() {
     if (this.zoom < 15) this.zoom++;

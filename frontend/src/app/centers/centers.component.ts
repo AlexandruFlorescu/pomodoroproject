@@ -13,7 +13,6 @@ export class CentersComponent {
 
   constructor(private centers: CentreService) {
     this.centers.getAllCenters().subscribe(resp => {
-      console.log(resp);
       this.dataSource = resp
     }
     )
