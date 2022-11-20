@@ -29,7 +29,7 @@ app.config['SWAGGER'] = {
 
 template = {
     "info": {
-        "title": "Reciclopedia Official REST API",
+        "title": "Recyclopedia Official REST API",
         "description": "U CAN MAKE THE WORLD BETTER STARTING NOW",
     }
 }
